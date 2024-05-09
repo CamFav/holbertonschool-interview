@@ -17,7 +17,7 @@ def canUnlockAll(boxes):
     Description:
         This function utilizes depth-first search (DFS) to explore the boxes
         and their keys. It keeps track of visited boxes to ensure that all
-        reachable boxes are visited. It determines what 
+        reachable boxes are visited. It determines what
         boxes can be opened based on the traversal results.
     """
     # Visited boxes

@@ -30,7 +30,7 @@ def canUnlockAll(boxes):
         visited.add(box_index)
 
         for key in boxes[box_index]:
-            if key not in visited:
+            if key < len(boxes) and key not in visited:
                 dfs(key)
 
     # Start DFS from box 0

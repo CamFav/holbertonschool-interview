@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+This module provides a function to calculate the fewest number of operations needed
+using only Copy All and Paste operations.
+"""
 
 def minOperations(n):
     """

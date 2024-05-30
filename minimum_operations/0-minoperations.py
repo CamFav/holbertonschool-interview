@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """
-This module provides a function to calculate the fewest number of operations needed
-using only Copy All and Paste operations.
+This module provides a function to calculate the fewest
+number of operations needed using only Copy All and Paste operations.
 """
+
 
 def minOperations(n):
     """
@@ -13,11 +14,12 @@ def minOperations(n):
     n (int): The target number of 'H' characters.
 
     Returns:
-    int: The minimum number of operations needed, or 0 if n is less than or equal to 1.
+    int: The minimum number of operations needed, or 0
+    if n is less than or equal to 1.
     """
     if n <= 1:
         return 0
-    
+
     operations = 0
     divisor = 2
 

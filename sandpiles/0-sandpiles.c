@@ -26,10 +26,10 @@ void print_grid(int grid[3][3]) {
  * Description: Stabilizes a grid by toppling cells with more than 3 grains
  */
 void stabilize(int grid[3][3]) {
+    int i, j;
     int stable = 0;
     while (!stable) {
         stable = 1;
-        int i, j;
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 3; j++) {
                 /* If a cell contains more than 3 grains */
@@ -56,6 +56,7 @@ void stabilize(int grid[3][3]) {
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
     int i, j;
+    int stable = 0;
     /* Add two sandpiles */
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
@@ -64,7 +65,6 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
     }
 
     /* Stabilize the resulting sandpile */
-    int stable = 0;
     while (!stable) {
         stable = 1;
         for (i = 0; i < 3; i++) {

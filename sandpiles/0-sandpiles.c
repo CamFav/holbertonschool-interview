@@ -8,8 +8,9 @@
  * Description: Prints the current state of a 3x3 grid
  */
 void print_grid(int grid[3][3]) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    int i, j;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             if (j != 0)
                 printf(" ");
             printf("%d", grid[i][j]);
@@ -25,21 +26,21 @@ void print_grid(int grid[3][3]) {
  * Description: Stabilizes a grid by toppling cells with more than 3 grains
  */
 void stabilize(int grid[3][3]) {
-    // 0 for not stable, 1 for stable
     int stable = 0;
     while (!stable) {
         stable = 1;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                // If a cell contains more than 3
+        int i, j;
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                /* If a cell contains more than 3 grains */
                 if (grid[i][j] > 3) {
-                    stable = 0; // Becomes instable
+                    stable = 0; /* Becomes unstable */
                     grid[i][j] -= 4;
-                    // Add a grain to each neightboors (if possible)
-                    if (i > 0) grid[i - 1][j]++; // Top
-                    if (i < 2) grid[i + 1][j]++; // Bottom
-                    if (j > 0) grid[i][j - 1]++; // Left
-                    if (j < 2) grid[i][j + 1]++; // Right
+                    /* Add a grain to each neighbor (if possible) */
+                    if (i > 0) grid[i - 1][j]++; /* Top */
+                    if (i < 2) grid[i + 1][j]++; /* Bottom */
+                    if (j > 0) grid[i][j - 1]++; /* Left */
+                    if (j < 2) grid[i][j + 1]++; /* Right */
                 }
             }
         }
@@ -54,19 +55,20 @@ void stabilize(int grid[3][3]) {
  * Description: Adds two sandpiles and stabilizes the resulting grid
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
-    // Add two sandpiles
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    int i, j;
+    /* Add two sandpiles */
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             grid1[i][j] += grid2[i][j];
         }
     }
 
-    // Stabilize the resulting sandpile
+    /* Stabilize the resulting sandpile */
     int stable = 0;
     while (!stable) {
         stable = 1;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
                 if (grid1[i][j] > 3) {
                     stable = 0;
                     printf("=\n");

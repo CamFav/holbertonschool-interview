@@ -9,6 +9,7 @@ void swap_values(heap_t *node1, heap_t *node2)
 {
 	int temp = node1->n;
 	node1->n = node2->n;
+
 	node2->n = temp;
 }
 

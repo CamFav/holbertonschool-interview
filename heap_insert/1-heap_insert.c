@@ -29,57 +29,52 @@ heap_t *heapify_up(heap_t *node)
 }
 
 /**
- * find_insertion_point - Finds the insertion point for the new node recursively
- * @node: The current node in the traversal
- * @height: The height of the current node
- * @depth: The current depth of the traversal
- * @value: The value to be inserted
+ * tree_size - Measures the size of a binary tree
+ * @tree: A pointer to the root of the tree to measure
  *
- * Return: A pointer to the newly inserted node
+ * Return: The size of the tree
  */
-heap_t *find_insertion_point(heap_t *node, int height, int depth, int value)
+size_t tree_size(const heap_t *tree)
 {
-    heap_t *new_node;
-
-    if (!node->left)
-    {
-        new_node = binary_tree_node(node, value);
-        node->left = new_node;
-        return (new_node);
-    }
-    else if (!node->right)
-    {
-        new_node = binary_tree_node(node, value);
-        node->right = new_node;
-        return (new_node);
-    }
-    else if (depth < height - 1)
-    {
-        new_node = find_insertion_point(node->left, height, depth + 1, value);
-        if (!new_node)
-            new_node = find_insertion_point(node->right, height, depth + 1, value);
-        return (new_node);
-    }
-    return (NULL);
+    if (!tree)
+        return (0);
+    return (1 + tree_size(tree->left) + tree_size(tree->right));
 }
 
 /**
- * tree_height - Computes the height of the tree
- * @tree: A pointer to the root of the tree
+ * find_parent - Finds the parent node to insert the new node
+ * @root: A pointer to the root of the tree
+ * @index: The index of the node to be inserted
+ * @size: The size of the tree
  *
- * Return: The height of the tree
+ * Return: A pointer to the parent node where the new node should be inserted
  */
-int tree_height(heap_t *tree)
+heap_t *find_parent(heap_t *root, size_t index, size_t size)
 {
-    int left_height;
-    int right_height;
+    size_t mask;
 
-    if (!tree)
-        return (0);
+    for (mask = 1; mask <= size; mask <<= 1)
+        ;
+    mask >>= 2;
 
-    left_height = tree_height(tree->left);
-    right_height = tree_height(tree->right);
-    return (left_height > right_height ? left_height + 1 : right_height + 1);
+    while (mask)
+    {
+        if (index & mask)
+        {
+            if (!root->right)
+                return (root);
+            root = root->right;
+        }
+        else
+        {
+            if (!root->left)
+                return (root);
+            root = root->left;
+        }
+        mask >>= 1;
+    }
+
+    return (root);
 }
 
 /**
@@ -91,8 +86,8 @@ int tree_height(heap_t *tree)
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *new_node;
-    int height;
+    heap_t *new_node, *parent;
+    size_t size;
 
     if (!root)
         return (NULL);
@@ -103,10 +98,17 @@ heap_t *heap_insert(heap_t **root, int value)
         return (*root);
     }
 
-    height = tree_height(*root);
-    new_node = find_insertion_point(*root, height, 0, value);
+    size = tree_size(*root);
+    parent = find_parent(*root, size + 1, size);
+
+    new_node = binary_tree_node(parent, value);
     if (!new_node)
         return (NULL);
+
+    if (!parent->left)
+        parent->left = new_node;
+    else
+        parent->right = new_node;
 
     return (heapify_up(new_node));
 }

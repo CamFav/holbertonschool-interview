@@ -71,10 +71,14 @@ heap_t *find_insertion_point(heap_t *node, int height, int depth, int value)
  */
 int tree_height(heap_t *tree)
 {
+    int left_height;
+    int right_height;
+
     if (!tree)
         return (0);
-    int left_height = tree_height(tree->left);
-    int right_height = tree_height(tree->right);
+
+    left_height = tree_height(tree->left);
+    right_height = tree_height(tree->right);
     return (left_height > right_height ? left_height + 1 : right_height + 1);
 }
 
@@ -88,6 +92,7 @@ int tree_height(heap_t *tree)
 heap_t *heap_insert(heap_t **root, int value)
 {
     heap_t *new_node;
+    int height;
 
     if (!root)
         return (NULL);
@@ -98,7 +103,7 @@ heap_t *heap_insert(heap_t **root, int value)
         return (*root);
     }
 
-    int height = tree_height(*root);
+    height = tree_height(*root);
     new_node = find_insertion_point(*root, height, 0, value);
     if (!new_node)
         return (NULL);

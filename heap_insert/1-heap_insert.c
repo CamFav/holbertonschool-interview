@@ -7,9 +7,9 @@
  */
 void swap_values(heap_t *node1, heap_t *node2)
 {
-    int temp = node1->n;
-    node1->n = node2->n;
-    node2->n = temp;
+	int temp = node1->n;
+	node1->n = node2->n;
+	node2->n = temp;
 }
 
 /**
@@ -20,12 +20,12 @@ void swap_values(heap_t *node1, heap_t *node2)
  */
 heap_t *heapify_up(heap_t *node)
 {
-    while (node->parent && node->n > node->parent->n)
-    {
-        swap_values(node, node->parent);
-        node = node->parent;
-    }
-    return (node);
+	while (node->parent && node->n > node->parent->n)
+	{
+		swap_values(node, node->parent);
+		node = node->parent;
+	}
+	return (node);
 }
 
 /**
@@ -36,9 +36,9 @@ heap_t *heapify_up(heap_t *node)
  */
 size_t tree_size(const heap_t *tree)
 {
-    if (!tree)
-        return (0);
-    return (1 + tree_size(tree->left) + tree_size(tree->right));
+	if (!tree)
+		return (0);
+	return (1 + tree_size(tree->left) + tree_size(tree->right));
 }
 
 /**
@@ -51,30 +51,30 @@ size_t tree_size(const heap_t *tree)
  */
 heap_t *find_parent(heap_t *root, size_t index, size_t size)
 {
-    size_t mask;
+	size_t mask;
 
-    for (mask = 1; mask <= size; mask <<= 1)
-        ;
-    mask >>= 2;
+	for (mask = 1; mask <= size; mask <<= 1)
+		;
+	mask >>= 2;
 
-    while (mask)
-    {
-        if (index & mask)
-        {
-            if (!root->right)
-                return (root);
-            root = root->right;
-        }
-        else
-        {
-            if (!root->left)
-                return (root);
-            root = root->left;
-        }
-        mask >>= 1;
-    }
+	while (mask)
+	{
+		if (index & mask)
+		{
+			if (!root->right)
+				return (root);
+			root = root->right;
+		}
+		else
+		{
+			if (!root->left)
+				return (root);
+			root = root->left;
+		}
+		mask >>= 1;
+	}
 
-    return (root);
+	return (root);
 }
 
 /**
@@ -86,29 +86,29 @@ heap_t *find_parent(heap_t *root, size_t index, size_t size)
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *new_node, *parent;
-    size_t size;
+	heap_t *new_node, *parent;
+	size_t size;
 
-    if (!root)
-        return (NULL);
+	if (!root)
+		return (NULL);
 
-    if (!*root)
-    {
-        *root = binary_tree_node(NULL, value);
-        return (*root);
-    }
+	if (!*root)
+	{
+		*root = binary_tree_node(NULL, value);
+		return (*root);
+	}
 
-    size = tree_size(*root);
-    parent = find_parent(*root, size + 1, size);
+	size = tree_size(*root);
+	parent = find_parent(*root, size + 1, size);
 
-    new_node = binary_tree_node(parent, value);
-    if (!new_node)
-        return (NULL);
+	new_node = binary_tree_node(parent, value);
+	if (!new_node)
+		return (NULL);
 
-    if (!parent->left)
-        parent->left = new_node;
-    else
-        parent->right = new_node;
+	if (!parent->left)
+		parent->left = new_node;
+	else
+		parent->right = new_node;
 
-    return (heapify_up(new_node));
+	return (heapify_up(new_node));
 }

@@ -32,8 +32,7 @@ binary_tree_t *create_node(binary_tree_t *parent, int value)
  *
  * Return: Pointer to the root node of the created AVL subtree.
  */
-binary_tree_t *build_avl_tree
-(int *array, int start, int end, binary_tree_t *parent)
+binary_tree_t *build_avl_tree(int *array, int start, int end, binary_tree_t *parent)
 {
 	int mid;
 	binary_tree_t *node;

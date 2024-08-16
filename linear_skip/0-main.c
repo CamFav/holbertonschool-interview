@@ -1,7 +1,6 @@
+#include "search.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "search.h"
 
 skiplist_t *create_skiplist(int *array, size_t size);
 void print_skiplist(const skiplist_t *list);

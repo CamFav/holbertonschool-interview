@@ -49,7 +49,7 @@ void sift_down(int *array, size_t start, size_t end, size_t size)
  */
 void heapify(int *array, size_t size)
 {
-    size_t start = (size - 2) / 2;  // Start at the last parent node
+    int start = (int)((size - 2) / 2);  // Start at the last parent node
 
     while (start >= 0)
     {

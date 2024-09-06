@@ -7,9 +7,9 @@
  */
 void swap(int *a, int *b)
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+	int temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
 /**
@@ -21,25 +21,25 @@ void swap(int *a, int *b)
  */
 void sift_down(int *array, size_t start, size_t end, size_t size)
 {
-    size_t root = start;
+	size_t root = start;
 
-    while (2 * root + 1 <= end)  // While the root has at least one child
-    {
-        size_t child = 2 * root + 1;  // Left child
-        size_t swap_idx = root;
+	while (2 * root + 1 <= end) /* While the root has at least one child */
+	{
+		size_t child = 2 * root + 1;  /* Left child */
+		size_t swap_idx = root;
 
-        if (array[swap_idx] < array[child])
-            swap_idx = child;
-        if (child + 1 <= end && array[swap_idx] < array[child + 1])
-            swap_idx = child + 1;
-        
-        if (swap_idx == root)
-            return;
+		if (array[swap_idx] < array[child])
+			swap_idx = child;
+		if (child + 1 <= end && array[swap_idx] < array[child + 1])
+			swap_idx = child + 1;
 
-        swap(&array[root], &array[swap_idx]);
-        print_array(array, size);
-        root = swap_idx;
-    }
+		if (swap_idx == root)
+			return;
+
+		swap(&array[root], &array[swap_idx]);
+		print_array(array, size);
+		root = swap_idx;
+	}
 }
 
 /**
@@ -49,13 +49,13 @@ void sift_down(int *array, size_t start, size_t end, size_t size)
  */
 void heapify(int *array, size_t size)
 {
-    int start = (int)((size - 2) / 2);  // Start at the last parent node
+	int start = (int)((size - 2) / 2); /* Start at the last parent node */
 
-    while (start >= 0)
-    {
-        sift_down(array, start, size - 1, size);
-        start--;
-    }
+	while (start >= 0)
+	{
+		sift_down(array, start, size - 1, size);
+		start--;
+	}
 }
 
 /**
@@ -65,18 +65,19 @@ void heapify(int *array, size_t size)
  */
 void heap_sort(int *array, size_t size)
 {
-    if (size < 2)
-        return;
+	size_t end;
 
-    heapify(array, size);
+	if (size < 2)
+		return;
 
-    size_t end = size - 1;
+	heapify(array, size);
 
-    while (end > 0)
-    {
-        swap(&array[end], &array[0]);
-        print_array(array, size);
-        end--;
-        sift_down(array, 0, end, size);
-    }
+	end = size - 1;
+	while (end > 0)
+	{
+		swap(&array[end], &array[0]);
+		print_array(array, size);
+		end--;
+		sift_down(array, 0, end, size);
+	}
 }

@@ -22,7 +22,8 @@ void print_array(int *array, size_t left, size_t right)
 }
 
 /**
- * advanced_binary_recursive - Helper function to perform recursive binary search
+ * advanced_binary_recursive - Helper function to perform recursive binary
+ * search
  * @array: The pointer to the first element of the array
  * @left: The leftmost index of the current subarray
  * @right: The rightmost index of the current subarray
@@ -49,7 +50,8 @@ int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
 }
 
 /**
- * advanced_binary - Initiates an advanced binary search to find the first occurrence
+ * advanced_binary - Initiates an advanced binary search to find the first
+ * occurrence
  * @array: The pointer to the first element of the array
  * @size: The number of elements in the array
  * @value: The value to search for

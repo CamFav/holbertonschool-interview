@@ -37,7 +37,8 @@ def count_words(subreddit, word_list, after='', word_count={}):
     for post in posts:
         title = post.get('data', {}).get('title', '').lower()
         for word in word_list:
-            word_count[word] = word_count.get(word, 0) + title.split().count(word)
+            word_count[word] = word_count.get(word, 0) + \
+                   title.split().count(word)
 
     if after:
         return count_words(subreddit, word_list, after, word_count)

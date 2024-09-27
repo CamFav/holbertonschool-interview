@@ -33,9 +33,32 @@ void heapify_down(heap_t *node)
  */
 heap_t *get_last_node(heap_t *root)
 {
-    /* Implement a queue for level-order traversal */
-    /* You can create a helper function to handle this */
-    /* Pseudo code example using a queue can be added here */
+    if (!root)
+        return (NULL);
+
+    heap_t *last = NULL;
+    heap_t **queue;
+    int front = 0, rear = 0, size = 1024;
+
+    queue = malloc(sizeof(heap_t *) * size);
+    if (!queue)
+        return (NULL);
+
+    queue[rear++] = root;
+
+    while (front < rear)
+    {
+        heap_t *node = queue[front++];
+        last = node;
+
+        if (node->left)
+            queue[rear++] = node->left;
+        if (node->right)
+            queue[rear++] = node->right;
+    }
+
+    free(queue);
+    return (last);
 }
 
 /**

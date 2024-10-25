@@ -32,5 +32,5 @@ def makeChange(coins, total):
             # Check if the
             if coin <= amount:
                 nums[amount] = min(nums[amount], 1 + nums[amount - coin])
-    # 
+    #
     return nums[total] if nums[total] != float('inf') else -1

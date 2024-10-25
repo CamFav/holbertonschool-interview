@@ -6,13 +6,16 @@
 
     Args:
         coins (list): Values of the coins in your possesssion.
-        total (int): The target amount to reach using the minimum number of coins.
+        total (int): The target amount to reach using the
+        minimum number of coins.
 
-    Returns:
+        Returns:
         int: The fewest number of coins needed to meet the total. 
              Returns 0 if the total is 0 or less.
              Returns -1 if it is not possible to meet the total with the given coins.
 """
+
+
 def makeChange(coins, total):
     if total <= 0:
         return 0
@@ -25,7 +28,7 @@ def makeChange(coins, total):
 
     for coin in coins:
         for amount in range(len(nums)):
-            # Check if the 
+            # Check if the
             if coin <= amount:
                 nums[amount] = min(nums[amount], 1 + nums[amount - coin])
     # 

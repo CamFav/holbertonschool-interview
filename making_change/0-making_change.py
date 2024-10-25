@@ -10,9 +10,10 @@
         minimum number of coins.
 
         Returns:
-        int: The fewest number of coins needed to meet the total. 
+        int: The fewest number of coins needed to meet the total.
              Returns 0 if the total is 0 or less.
-             Returns -1 if it is not possible to meet the total with the given coins.
+             Returns -1 if it is not possible to meet the
+                        total with the given coins.
 """
 
 

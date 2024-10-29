@@ -24,13 +24,16 @@ def makeChange(coins, total):
     # Initialize array with infinity number
     nums = [float('inf') for x in range(total + 1)]
 
-    # Make sure that 0 coins is needed for 0 dollars
+    # Make sure that 0 coins are needed for 0 dollars
     nums[0] = 0
 
     for coin in coins:
+        # Check if the coin can contribute to reach total amount
         for amount in range(len(nums)):
-            # Check if the
             if coin <= amount:
                 nums[amount] = min(nums[amount], 1 + nums[amount - coin])
-    #
+
+    # Return -1 if the total cannot be reached with given coins
+    # Otherwise, return the minimum number of coins needed
+    # to reach total
     return nums[total] if nums[total] != float('inf') else -1

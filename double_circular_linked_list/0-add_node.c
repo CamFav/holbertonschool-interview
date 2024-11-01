@@ -5,7 +5,7 @@
  * a circular doubly linked list
  * @list: Pointer to the head of the list
  * @str: String to be duplicated and stored in the new node
- * 
+ *
  * Return: Address of the new node, otherwise NULL
  */
 List *add_node_end(List **list, char *str)
@@ -15,9 +15,9 @@ List *add_node_end(List **list, char *str)
 	/* Allocate memory for the new node */
 	new_node = malloc(sizeof(List));
 	if (!new_node)
-		return (NULL);
+        return (NULL);
 
-	/* Duplicate the string */
+    /* Duplicate the string */
 	new_node->str = strdup(str);
 	if (!new_node->str)
 	{
@@ -48,7 +48,7 @@ List *add_node_end(List **list, char *str)
  * a circular doubly linked list
  * @list: Pointer to the head of the list
  * @str: String to be duplicated and stored in the new node
- * 
+ *
  * Return: Address of the new node, otherwise NULL
  */
 List *add_node_begin(List **list, char *str)

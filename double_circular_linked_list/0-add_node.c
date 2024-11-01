@@ -15,9 +15,9 @@ List *add_node_end(List **list, char *str)
 	/* Allocate memory for the new node */
 	new_node = malloc(sizeof(List));
 	if (!new_node)
-        return (NULL);
+		return (NULL);
 
-    /* Duplicate the string */
+	/* Duplicate the string */
 	new_node->str = strdup(str);
 	if (!new_node->str)
 	{

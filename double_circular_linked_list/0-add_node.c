@@ -45,3 +45,46 @@ List *add_node_end(List **list, char *str) {
 
     return new_node;
 }
+
+/**
+ * add_node_begin - Adds a new node to the beginning of a circular doubly linked list
+ */
+List *add_node_begin(List **list, char *str) {
+    List *new_node, *tail;
+
+    /* Allocate memory for the new node */
+    new_node = malloc(sizeof(List));
+
+    if (!new_node)
+        return NULL;
+
+    /* Duplicate the string */
+    new_node->str = strdup(str);
+
+    if (!new_node->str)
+    {
+        free(new_node);
+        return NULL;
+    }
+
+    /* If list is empty, set prev and next pointers of the node to itsef. */
+    if (!*list)
+    {
+        new_node->next = new_node;
+        new_node->prev = new_node;
+        *list = new_node;
+    }
+
+    /* Else, if list is not empty, set the pointers to insert it at the beginning */
+    else
+    {
+        tail = (*list)->prev;
+        new_node->next = *list;
+        new_node->prev = tail;
+        tail->next = new_node;
+        (*list)->prev = new_node;
+        *list = new_node;
+    }
+
+    return new_node;
+}

@@ -19,6 +19,7 @@ void counting_sort_by_digit(int *array, size_t size, int digit_place)
 	{
 		int index = (array[i] / digit_place) % 10;
 		count[index]++;
+
 	}
 
 
@@ -33,6 +34,7 @@ void counting_sort_by_digit(int *array, size_t size, int digit_place)
 	{
 		/* Find the current digit based on digit_place */
 		int current_digit = (array[i - 1] / digit_place) % 10;
+
 		sorted[count[current_digit] - 1] = array[i - 1];
 		count[current_digit]--;
 	}

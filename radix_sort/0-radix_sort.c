@@ -18,6 +18,7 @@ void counting_sort_by_digit(int *array, size_t size, int digit_place)
 	for (i = 0; i < size; i++)
 	{
 		int index = (array[i] / digit_place) % 10;
+
 		count[index]++;
 
 	}

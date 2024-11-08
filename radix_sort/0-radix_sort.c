@@ -21,6 +21,7 @@ void counting_sort_by_digit(int *array, size_t size, int digit_place)
 		count[index]++;
 	}
 
+
 	/* Calculate cumulative count */
 	for (i = 1; i < 10; i++)
 	{
@@ -35,6 +36,7 @@ void counting_sort_by_digit(int *array, size_t size, int digit_place)
 		sorted[count[current_digit] - 1] = array[i - 1];
 		count[current_digit]--;
 	}
+
 
 	/* Copy the sorted elements into the original array */
 	for (i = 0; i < size; i++)

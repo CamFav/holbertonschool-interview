@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "sort.h"
 
 /**
@@ -6,55 +8,58 @@
  * @size: The size of the array
  * @digit_place: The current digit place to sort by (1, 10, 100, ...)
  */
-
 void counting_sort_by_digit(int *array, size_t size, int digit_place)
 {
     int count[10] = {0};
     int sorted[size];
+    size_t i;
 
     /* Calculate count of elements */
-    for (int i = 0; i < size; i++)
+    for (i = 0; i < size; i++)
     {
         int index = (array[i] / digit_place) % 10;
         count[index]++;
     }
 
     /* Calculate cumulative count */
-    for (int i = 1; i < 10; i++)
+    for (i = 1; i < 10; i++)
     {
         count[i] += count[i - 1];
     }
 
-    /* Place the elements in sorted order */
-    for (int i = size - 1; i >= 0; i--)
+    /* Place the elements in sorted ordSer */
+    for (i = size; i > 0; i--)
     {
-        /* Find the current digit based on diigt_place */
-        int current_digit = (array[i] / digit_place) % 10;
+        /* Find the current digit based on digit_place */
+        int current_digit = (array[i - 1] / digit_place) % 10;
         sorted[count[current_digit] - 1] = array[i - 1];
         count[current_digit]--;
     }
 
-    /* Copy the sorted elements into original array */
-    for (int i = 0; i < size; i++) {
+    /* Copy the sorted elements into the original array */
+    for (i = 0; i < size; i++)
+    {
         array[i] = sorted[i];
-
-    free(sorted);
     }
 }
 
-
 /**
- * radic_sort - sorts an array of integers in ascending order using the Radix sort algorithm
- * @array: array that contain only nymbers >=0
- * 
+ * radix_sort - sorts an array of integers in ascending order using the Radix sort algorithm
+ * @array: array that contain only numbers >= 0
+ * @size: The size of the array
+ *
  * Return: Print the array each time you increase your significant digit
  */
-
 void radix_sort(int *array, size_t size)
 {
-    int max_num = array[0];
+    int max_num;
     size_t i;
     int digit_place;
+
+    if (size < 2)
+        return;
+
+    max_num = array[0];
 
     /* Find the maximum number to determine the number of digits */
     for (i = 1; i < size; i++)

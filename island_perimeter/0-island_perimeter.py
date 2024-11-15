@@ -1,5 +1,13 @@
 #!/usr/bin/python3
+"""
+island_perimeter - Calculate the amount of rainwater trapped between walls.
 
+Parameters:
+    grid (list of int): A list of integers representing an island.
+
+Returns:
+    int: The perimeter of the island.
+"""
 def island_perimeter(grid):
     """
     Calculate the amount of rainwater trapped between walls.

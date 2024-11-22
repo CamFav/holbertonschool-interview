@@ -35,16 +35,16 @@ binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
  */
 int is_bst(const binary_tree_t *tree, int min, int max)
 {
-    if (!tree)
-        return (1);
+	if (!tree)
+		return (1);
 
-    if (tree->n <= min || tree->n >= max)
-        return (0);
+	if (tree->n <= min || tree->n >= max)
+		return (0);
 
-    int left_bst = is_bst(tree->left, min, tree->n);
-    int right_bst = is_bst(tree->right, tree->n, max);
+	int left_bst = is_bst(tree->left, min, tree->n);
+	int right_bst = is_bst(tree->right, tree->n, max);
 
-    return (left_bst && right_bst);
+	return (left_bst && right_bst);
 }
 
 /**

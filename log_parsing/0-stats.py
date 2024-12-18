@@ -36,6 +36,7 @@ def signal_handler(sig, frame):
     Handle keyboard interruption (CTRL+C) and print final statistics.
     """
     print_statistics()
+    sys.exit(0)
 
 
 # Register the signal handler
@@ -44,16 +45,33 @@ signal.signal(signal.SIGINT, signal_handler)
 # Read input line by line
 try:
     for line in sys.stdin:
+        if not line.strip():
+            continue
         line_count += 1
+
+        # Split line and validate
         line_parsed = line.split()
         length_line = len(line_parsed)
         if length_line < 2:
             continue
-        total_file_size += int(line_parsed[length_line - 1])
-        if line_parsed[length_line - 2] not in status_code_counts.keys():
+
+        try:
+            # Update total file size
+            file_size = int(line_parsed[-1])
+            total_file_size += file_size
+        except ValueError:
             continue
-        status_code_counts[line_parsed[length_line - 2]] += 1
+
+        # Update status code counts
+        status_code = line_parsed[-2]
+        if status_code in status_code_counts:
+            status_code_counts[status_code] += 1
+
+        # Print stats every 10 lines
         if line_count % 10 == 0:
             print_statistics()
+
+except KeyboardInterrupt:
+    print_statistics()
 finally:
     print_statistics()

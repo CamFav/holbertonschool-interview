@@ -4,64 +4,56 @@ Log parsing script that reads logs from stdin and computes metrics.
 """
 import sys
 import re
-from signal import signal, SIGINT
+import signal
 
 # Initialize metrics
 total_file_size = 0
-status_code_counts = {}
-VALID_STATUS_CODES = [200, 301, 400, 401, 403, 404, 405, 500]
+status_code_counts = {
+    "200": 0,
+    "301": 0,
+    "400": 0,
+    "401": 0,
+    "403": 0,
+    "404": 0,
+    "405": 0,
+    "500": 0,
+}
 line_count = 0
 
 
-def print_stats():
+def print_statistics():
     """
     Print the current metrics: total file size and count of status codes.
     """
-    print(f"File size: {total_file_size}")
+    print("File size: {}".format(total_file_size))
     for code in sorted(status_code_counts.keys()):
-        print(f"{code}: {status_code_counts[code]}")
+        if status_code_counts[code] > 0:
+            print("{}: {}".format(code, status_code_counts[code]))
 
 
-def signal_handler(signal_received, frame):
+def signal_handler(sig, frame):
     """
     Handle keyboard interruption (CTRL+C) and print final statistics.
     """
-    print_stats()
-    sys.exit(0)
+    print_statistics()
 
 
 # Register the signal handler
-signal(SIGINT, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
 # Read input line by line
 try:
     for line in sys.stdin:
         line_count += 1
-        try:
-            # Match the input format using regex
-            pattern = (
-                r'.+ - \[.+\] "GET /projects/260 HTTP/1.1" (\d{3}) (\d+)'
-            )
-            match = re.match(pattern, line.strip())
-            if match:
-                global total_file_size
-                status_code = int(match.group(1))
-                file_size = int(match.group(2))
-                total_file_size += file_size
-
-                if status_code in VALID_STATUS_CODES:
-                    if status_code not in status_code_counts:
-                        status_code_counts[status_code] = 0
-                    status_code_counts[status_code] += 1
-        except Exception:
-            # Ignore malformed lines
+        line_parsed = line.split()
+        length_line = len(line_parsed)
+        if length_line < 2:
             continue
-
-        # Print stats every 10 lines
+        total_file_size += int(line_parsed[length_line - 1])
+        if line_parsed[length_line - 2] not in status_code_counts.keys():
+            continue
+        status_code_counts[line_parsed[length_line - 2]] += 1
         if line_count % 10 == 0:
-            print_stats()
-
-except KeyboardInterrupt:
-    # Print stats and exit gracefully on keyboard interrupt
-    print_stats()
-    sys.exit(0)
+            print_statistics()
+finally:
+    print_statistics()

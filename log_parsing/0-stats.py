@@ -44,9 +44,9 @@ try:
             )
             match = re.match(pattern, line.strip())
             if match:
+                global total_file_size
                 status_code = int(match.group(1))
                 file_size = int(match.group(2))
-                global total_file_size
                 total_file_size += file_size
 
                 if status_code in VALID_STATUS_CODES:

@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+Module for Prime Game.
+This module contains the `isWinner` function and helper functions
+to determine the winner of a series of rounds of the prime game.
+"""
 
 def is_prime(num):
     """Check if a number is a prime number."""

@@ -3,7 +3,6 @@
 Log parsing script that reads logs from stdin and computes metrics.
 """
 import sys
-import re
 import signal
 
 # Initialize metrics
